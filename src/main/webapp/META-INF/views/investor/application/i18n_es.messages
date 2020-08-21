@@ -1,0 +1,12 @@
+investor.application.list.label.ticker = Ticker
+investor.application.list.label.creation-moment = Momento de creación
+investor.application.list.label.money-offer = Oferta de dinero
+
+investor.application.form.label.ticker = Ticker
+investor.application.form.label.creation-moment = Momento de creación
+investor.application.form.label.statement = Declaración
+investor.application.form.label.money-offer = Oferta de dinero
+investor.application.form.label.investmentRounds = Ronda de inversión
+
+investor.application.form.button.return = Volver
+

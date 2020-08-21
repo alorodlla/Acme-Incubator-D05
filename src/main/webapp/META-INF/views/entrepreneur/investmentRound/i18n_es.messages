@@ -1,0 +1,11 @@
+entrepreneur.investmentRound.list.label.title = Titulo
+entrepreneur.investmentRound.list.label.round = Tipo de inversion
+entrepreneur.investmentRound.list.label.description = Descripcion
+entrepreneur.investmentRound.list.label.creation = Momento de creacion
+entrepreneur.investmentRound.list.label.amount = Cantidad de dinero
+entrepreneur.investmentRound.list.label.optionalLink = Link opcional
+entrepreneur.investmentRound.list.label.ticker = Ticker
+	
+entrepreneur.investmentRound.form.label.activities = Programa del trabajo
+
+entrepreneur.investmentRound.button.return= Return

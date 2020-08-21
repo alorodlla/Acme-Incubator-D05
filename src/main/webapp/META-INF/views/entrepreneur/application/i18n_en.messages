@@ -1,0 +1,11 @@
+entrepreneur.application.list.label.ticker = Ticker
+entrepreneur.application.list.label.creation-moment = Creation moment
+entrepreneur.application.list.label.money-offer = Money Offer 
+
+entrepreneur.application.form.label.ticker = Ticker
+entrepreneur.application.form.label.creation-moment = Creation moment
+entrepreneur.application.form.label.statement = Statement
+entrepreneur.application.form.label.money-offer = Money Offer 
+
+
+entrepreneur.application.form.button.return = Return
