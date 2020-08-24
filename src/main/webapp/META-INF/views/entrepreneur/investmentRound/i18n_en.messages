@@ -15,6 +15,7 @@ entrepreneur.investmentRound.ticker.activity.error = First part of the ticker de
 entrepreneur.investmentRound.ticker.year.error = Second part denotes the last two digits of the creation year
 
 entrepreneur.investmentRound.form.label.activities = Work Programme
+entrepreneur.investmentRound.form.label.createActivities = Create Activity
 	
 entrepreneur.investmentRound.form.button.update = Update	
 entrepreneur.investmentRound.form.button.create= Create
