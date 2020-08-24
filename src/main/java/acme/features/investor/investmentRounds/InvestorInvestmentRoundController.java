@@ -18,12 +18,20 @@ import acme.framework.controllers.AbstractController;
 public class InvestorInvestmentRoundController extends AbstractController<Investor, InvestmentRound> {
 
 	@Autowired
-	private InvestorInvestmentRoundShowService2 showService2;
+	private InvestorInvestmentRoundListService	listService;
+
+	@Autowired
+	private InvestorInvestmentRoundShowService	showService;
+
+	@Autowired
+	private InvestorInvestmentRoundShowService2	showService2;
 
 
 	@PostConstruct
 	private void initialise() {
 
+		super.addBasicCommand(BasicCommand.LIST, this.listService);
+		super.addBasicCommand(BasicCommand.SHOW, this.showService);
 		super.addCustomCommand(CustomCommand.SHOW_MINE, BasicCommand.SHOW, this.showService2);
 
 	}

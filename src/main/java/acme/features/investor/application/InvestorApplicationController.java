@@ -23,11 +23,15 @@ public class InvestorApplicationController extends AbstractController<Investor, 
 	@Autowired
 	private InvestorApplicationListMineService	listMineService;
 
+	@Autowired
+	private InvestorApplicationCreateService	createApplicationService;
+
 
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listMineService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createApplicationService);
 	}
 
 }

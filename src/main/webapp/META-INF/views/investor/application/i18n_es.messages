@@ -8,5 +8,6 @@ investor.application.form.label.statement = Declaración
 investor.application.form.label.money-offer = Oferta de dinero
 investor.application.form.label.investmentRounds = Ronda de inversión
 
+investor.application.form.button.create = Crear
 investor.application.form.button.return = Volver
 
