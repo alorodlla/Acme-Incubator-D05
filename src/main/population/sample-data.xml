@@ -339,7 +339,7 @@
 	</bean>
 	
 	<bean id="investmentRound02" class="acme.entities.investmentRounds.InvestmentRound">
-		<property name="ticker" value= "SCI-19-000001"/>
+		<property name="ticker" value= "ART-19-000001"/>
 		<property name="creation" value= "2019/01/01 14:59"/>
 		<property name="round" value= "ANGEL"/>
 		<property name="title" value= "Title 02"/>
@@ -376,6 +376,12 @@
 		<property name="moneyOffer" value= "3000 EUR"/>
 		<property name="investor" ref= "investor1Investor"/>
 		<property name="iRound" ref= "investmentRound02"/>
+	</bean>
+	
+	<!-- Parameter -->
+	<bean id="parameter" class= "acme.entities.parameters.Parameter">
+		<property name= "spamwords" value="sex, hardcore, viagra, cialis, nigeria, you`ve won, million dollar, sexo, has ganado, millon de dolares"/>
+		<property name= "spamthreshold" value= "2.5"/>
 	</bean>
 	
 </beans>
