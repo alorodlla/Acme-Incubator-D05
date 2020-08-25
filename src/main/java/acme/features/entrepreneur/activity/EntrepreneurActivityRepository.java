@@ -28,4 +28,7 @@ public interface EntrepreneurActivityRepository extends AbstractRepository {
 
 	@Query("select i from InvestmentRound i where i.id = ?1")
 	InvestmentRound findOneInvestmentRoundById(int id);
+
+	@Query("select sum(a.budget.amount) from Activity a where a.investmentRound.id = ?1")
+	Double sumBudgetsByInvestmentRoundId(int investmentRoundId);
 }

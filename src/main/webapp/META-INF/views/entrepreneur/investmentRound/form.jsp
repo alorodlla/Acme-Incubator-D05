@@ -57,7 +57,7 @@
   		code="entrepreneur.investmenRound.form.button.delete"
   		action="/entrepreneur/investment-round/delete"/>
   		
-  	<jstl:if test="${command != 'create' }">
+  	<jstl:if test="${command != 'create'}">
 	<acme:form-submit method="get" code="entrepreneur.investmentRound.form.label.createActivities" action="/entrepreneur/activity/create?investmentRoundId=${id}"/>
 	</jstl:if>
   		

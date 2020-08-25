@@ -13,6 +13,9 @@ entrepreneur.investmentRound.form.delete.message = An investment round can not b
 entrepreneur.investmentRound.form.error.spamDescription = This description contains spam
 entrepreneur.investmentRound.ticker.activity.error = First part of the ticker denotes the first three letters of the corresponding activity sector
 entrepreneur.investmentRound.ticker.year.error = Second part denotes the last two digits of the creation year
+entrepreneur.investmentRound.form.error.budgetsNotSumAmount = Activity budgets sum is not equal to the amount in the investment
+entrepreneur.investmentRound.form.error.budgetsIsNull = There are not activities associated to the investment
+entrepreneur.investmentRound.amount.currency.error = Money currency is euros
 
 entrepreneur.investmentRound.form.label.activities = Work Programme
 entrepreneur.investmentRound.form.label.createActivities = Create Activity
