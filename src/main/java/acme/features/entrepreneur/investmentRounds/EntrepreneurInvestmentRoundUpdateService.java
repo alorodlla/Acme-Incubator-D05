@@ -97,8 +97,9 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 			Collection<Activity> activities = this.repository.findManyActivitiesByInvestmentRoundId(investmentRoundId);
 
 			if (!activities.isEmpty()) {
+				Double amount = entity.getAmount().getAmount();
 				Double sum = this.repository.sumBudgetsByInvestmentRoundId(investmentRoundId);
-				errors.state(request, sum == request.getModel().getDouble("amount"), "finalMode", "entrepreneur.investmentRound.form.error.budgetsNotSumAmount");
+				errors.state(request, Double.compare(amount, sum) == 0, "finalMode", "entrepreneur.investmentRound.form.error.budgetsNotSumAmount");
 			} else {
 				errors.state(request, !activities.isEmpty(), "finalMode", "entrepreneur.investmentRound.form.error.budgetsIsNull");
 			}
