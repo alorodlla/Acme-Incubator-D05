@@ -104,14 +104,10 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 			errors.state(request, tooMuchMoney, "moneyOffer", "investor.application.moneyOffer.error.maxSurpassed");
 		}
 
-		//Check money
+		//Check if money is in euros
 		if (!errors.hasErrors("moneyOffer")) {
-			//Check if money is in euros
 			Money mon = entity.getMoneyOffer();
 			errors.state(request, mon.getCurrency().contentEquals("EUR") || mon.getCurrency().contentEquals("€"), "moneyOffer", "investor.application.moneyOffer.currency.error");
-			//Check if money is positive
-			boolean positive = !mon.getAmount().toString().startsWith("-");
-			errors.state(request, positive, "moneyOffer", "investor.application.moneyOffer.error.negativeMoney");
 		}
 
 		//Check ticker
