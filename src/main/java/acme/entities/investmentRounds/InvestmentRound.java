@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 
 import acme.entities.roles.Entrepreneur;
 import acme.framework.datatypes.Money;
@@ -28,6 +29,7 @@ public class InvestmentRound extends DomainEntity {
 
 	@Column(unique = true)
 	@NotBlank
+	@Pattern(regexp = "^[A-Z]{3}\\-\\d{2}\\-\\d{6}$")
 	private String				ticker;
 
 	@NotNull

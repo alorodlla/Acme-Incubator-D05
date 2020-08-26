@@ -19,10 +19,20 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 
 	@Autowired
 	private EntrepreneurInvestmentRoundListMineService	listservice;
+
 	@Autowired
 	private EntrepreneurInvestmentRoundShowService		showservice;
 	@Autowired
 	private EntrepreneurInvestmentRoundShowService2		showService2;
+
+	@Autowired
+	private EntrepreneurInvestmentRoundCreateService	createService;
+
+	@Autowired
+	private EntrepreneurInvestmentRoundUpdateService	updateService;
+
+	@Autowired
+	private EntrepreneurInvestmentRoundDeleteService	deleteService;
 
 
 	@PostConstruct
@@ -30,6 +40,9 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listservice);
 		super.addBasicCommand(BasicCommand.SHOW, this.showservice);
 		super.addCustomCommand(CustomCommand.SHOW_MINE, BasicCommand.SHOW, this.showService2);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+		super.addBasicCommand(BasicCommand.DELETE, this.deleteService);
 	}
 
 }
