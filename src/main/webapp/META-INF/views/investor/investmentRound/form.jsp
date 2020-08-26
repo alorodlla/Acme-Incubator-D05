@@ -30,5 +30,6 @@
 	
 	<acme:form-submit method="get" code="investor.investmentRound.form.label.activities" action="/investor/activity/list-from-investment?investmentRoundId=${id}"/>
 	
+	<acme:form-submit method="get" code="investor.investmentRoundApp.form.button.create" action="/investor/application/create?iRoundId=${id}"/>
 	<acme:form-return code="investor.investmentRound.button.return"/>
 </acme:form>

@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Investor;
@@ -31,6 +32,7 @@ public class Application extends DomainEntity {
 
 	@Column(unique = true)
 	@NotBlank
+	@Pattern(regexp = "^[A-Z]{3}\\-\\d{2}\\-\\d{6}$")
 	private String				ticker;
 
 	@NotNull
@@ -38,8 +40,13 @@ public class Application extends DomainEntity {
 	@PastOrPresent
 	private Date				creationMoment;
 
+	@NotNull
+	private String				status;
+
 	@NotBlank
 	private String				statement;
+
+	private String				justification;
 
 	@Valid
 	@NotNull

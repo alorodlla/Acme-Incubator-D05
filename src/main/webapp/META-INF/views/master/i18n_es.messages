@@ -84,6 +84,7 @@ master.menu.entrepreneur.investmentRound.create = Crear Inversiones
 # master.menu.investor ##########################################################
 master.menu.investor = Inversor
 master.menu.investor.application.list = Aplicaciones
+master.menu.investor.investmentRound.list = Inversiones
 
 # master.menu.user-account ####################################################
 

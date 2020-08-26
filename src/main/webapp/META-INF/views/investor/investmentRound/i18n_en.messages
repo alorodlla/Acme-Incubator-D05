@@ -8,4 +8,5 @@ investor.investmentRound.list.label.ticker = Ticker
 
 investor.investmentRound.form.label.activities = Work Programme
 	
+investor.investmentRoundApp.form.button.create = Apply to invest
 investor.investmentRound.button.return= Return

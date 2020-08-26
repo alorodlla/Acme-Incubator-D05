@@ -1,5 +1,3 @@
- 
-
 package acme.entities.parameters;
 
 import javax.persistence.Entity;
@@ -25,21 +23,4 @@ public class Parameter extends DomainEntity {
 	@NotBlank
 	private String				spamwords;
 }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
