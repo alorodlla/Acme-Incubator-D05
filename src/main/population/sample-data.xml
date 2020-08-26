@@ -374,9 +374,16 @@
 		<property name="creationMoment" value= "2020/07/05 14:59"/>
 		<property name="status" value= "pending"/>
 		<property name="statement" value= "Primera aplicación"/>
+		<property name="justification" value= ""/>
 		<property name="moneyOffer" value= "1000 EUR"/>
 		<property name="investor" ref= "investor1Investor"/>
 		<property name="iRound" ref= "investmentRound02"/>
+	</bean>
+	
+		<!-- Parameter -->
+	<bean id="parameter" class= "acme.entities.parameters.Parameter">
+		<property name= "spamwords" value="sex, hardcore, viagra, cialis, nigeria, you`ve won, million dollar, sexo, has ganado, millon de dolares"/>
+		<property name= "spamthreshold" value= "2.5"/>
 	</bean>
 	
 </beans>

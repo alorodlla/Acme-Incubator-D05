@@ -46,6 +46,8 @@ public class Application extends DomainEntity {
 	@NotBlank
 	private String				statement;
 
+	private String				justification;
+
 	@Valid
 	@NotNull
 	private Money				moneyOffer;

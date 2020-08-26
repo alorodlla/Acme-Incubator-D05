@@ -21,12 +21,15 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 	private EntrepreneurInvestmentRoundListMineService	listservice;
 	@Autowired
 	private EntrepreneurInvestmentRoundShowService		showservice;
+	@Autowired
+	private EntrepreneurInvestmentRoundShowService2		showService2;
 
 
 	@PostConstruct
 	private void initialise() {
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listservice);
 		super.addBasicCommand(BasicCommand.SHOW, this.showservice);
+		super.addCustomCommand(CustomCommand.SHOW_MINE, BasicCommand.SHOW, this.showService2);
 	}
 
 }

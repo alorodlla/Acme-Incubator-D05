@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.applications.Application;
 import acme.entities.investmentRounds.InvestmentRound;
+import acme.entities.parameters.Parameter;
 import acme.entities.roles.Entrepreneur;
 import acme.entities.roles.Investor;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.datatypes.Money;
 import acme.framework.services.AbstractCreateService;
 
 @Service
@@ -31,11 +33,6 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert request != null;
 
 		boolean result;
-		int iRoundId;
-		InvestmentRound iRound;
-
-		iRoundId = request.getModel().getInteger("iRoundId");
-		iRound = this.repository.findInvestmentRoundPublished(iRoundId);
 
 		result = request.getPrincipal().hasRole(Investor.class);
 		return result;
@@ -76,7 +73,7 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		InvestmentRound iRound;
 		int iRoundId;
 		iRoundId = request.getModel().getInteger("iRoundId");
-		iRound = this.repository.findInvestmentRoundPublished(iRoundId);
+		iRound = this.repository.findInvestmentRoundById(iRoundId);
 		result.setIRound(iRound);
 
 		String status = "pending";
@@ -99,13 +96,25 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 
 		Entrepreneur entrepreneur = entity.getIRound().getEntrepreneur();
 
+		//Check the amount of money that is going to be invested
 		if (!errors.hasErrors("moneyOffer")) {
 			Double mny = entity.getMoneyOffer().getAmount();
 			Double max = entity.getIRound().getAmount().getAmount();
 			boolean tooMuchMoney = max >= mny;
-			errors.state(request, tooMuchMoney, "moneyOffer", "investor.application.moneyOffer.maxSurpassed.error");
+			errors.state(request, tooMuchMoney, "moneyOffer", "investor.application.moneyOffer.error.maxSurpassed");
 		}
 
+		//Check money
+		if (!errors.hasErrors("moneyOffer")) {
+			//Check if money is in euros
+			Money mon = entity.getMoneyOffer();
+			errors.state(request, mon.getCurrency().contentEquals("EUR") || mon.getCurrency().contentEquals("€"), "moneyOffer", "investor.application.moneyOffer.currency.error");
+			//Check if money is positive
+			boolean positive = !mon.getAmount().toString().startsWith("-");
+			errors.state(request, positive, "moneyOffer", "investor.application.moneyOffer.error.negativeMoney");
+		}
+
+		//Check ticker
 		if (!errors.hasErrors("ticker")) {
 
 			boolean isFirstOk, isSecondOk;
@@ -115,21 +124,30 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 
 			if (lenght > 2) {
 				isFirstOk = tickerParts.stream().anyMatch(x -> entrepreneur.getSector().toString().substring(0, 3).trim().equalsIgnoreCase(x.trim()));
-				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.activity.error");
+				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.error.activity");
 			} else if (lenght == 2) {
 				isFirstOk = tickerParts.stream().anyMatch(x -> entrepreneur.getSector().toString().substring(0, 2).concat("X").equalsIgnoreCase(x));
-				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.activity.error");
+				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.error.activity");
 			} else {
 				isFirstOk = tickerParts.stream().anyMatch(x -> entrepreneur.getSector().toString().substring(0, 1).concat("XX").equalsIgnoreCase(x));
-				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.activity.error");
+				errors.state(request, isFirstOk, "ticker", "investor.application.ticker.error.activity");
 			}
 
 			isFirstOk = tickerParts.stream().anyMatch(x -> StringUtils.isAllUpperCase(x.trim()));
-			errors.state(request, isFirstOk, "ticker", "investor.application.ticker.uppercase.error");
+			errors.state(request, isFirstOk, "ticker", "investor.application.ticker.error.uppercase");
 
 			isSecondOk = tickerParts.stream().anyMatch(x -> entity.getCreationMoment().toString().substring(entity.getCreationMoment().toString().length() - 2, entity.getCreationMoment().toString().length()).equals(x.trim()));
-			errors.state(request, isSecondOk, "ticker", "investor.application.ticker.year.error");
+			errors.state(request, isSecondOk, "ticker", "investor.application.ticker.error.year");
 
+		}
+
+		//Check spam
+		if (!errors.hasErrors("statement")) {
+			Parameter p = this.repository.findParameters();
+			String spamWords = p.getSpamwords();
+			Double spamThreshold = p.getSpamthreshold();
+			String statement = entity.getStatement();
+			errors.state(request, !ParameterMethods.isSpam(statement, spamWords, spamThreshold), "statement", "investor.application.form.error.spamStatement");
 		}
 
 	}
