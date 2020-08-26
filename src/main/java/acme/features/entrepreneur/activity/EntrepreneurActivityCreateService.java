@@ -103,13 +103,6 @@ public class EntrepreneurActivityCreateService implements AbstractCreateService<
 			errors.state(request, !parameterMethods.isSpam(title, spamWords, spamThreshold), "title", "entrepreneur.activity.form.error.spamTitle");
 		}
 
-		//		if (!errors.hasErrors("budget")) {
-		//			Money budget = entity.getBudget();
-		//			errors.state(request, budget.getCurrency().contentEquals("EUR") || budget.getCurrency().contentEquals("€"), "budget", "entrepreneur.activity.budget.currency.error");
-		//			invstRound = this.repository.findOneInvestmentRoundById(request.getModel().getInteger("investmentRoundId"));
-		//			errors.state(request, entity.getBudget().getAmount() <= invstRound.getAmount().getAmount(), "budget", "entrepreneur.activity.budget.biggerThanAmount");
-		//		}
-
 		if (!errors.hasErrors("budget")) {
 			Money budget = entity.getBudget();
 			Double sum = this.repository.sumBudgetsByInvestmentRoundId(request.getModel().getInteger("investmentRoundId"));
@@ -119,6 +112,7 @@ public class EntrepreneurActivityCreateService implements AbstractCreateService<
 				sum = 0.;
 			}
 			errors.state(request, sum + budget.getAmount() <= invstRound.getAmount().getAmount(), "budget", "entrepreneur.activity.budget.biggerThanAmount.error");
+			errors.state(request, budget.getCurrency().contentEquals("EUR") || budget.getCurrency().contentEquals("€"), "budget", "entrepreneur.activity.budget.currency.error");
 		}
 
 		if (!errors.hasErrors("start")) {
