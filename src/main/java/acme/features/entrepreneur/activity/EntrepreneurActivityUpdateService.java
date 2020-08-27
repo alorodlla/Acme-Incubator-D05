@@ -90,41 +90,45 @@ public class EntrepreneurActivityUpdateService implements AbstractUpdateService<
 		Date fecha;
 		InvestmentRound invstRound;
 
-		errors.state(request, !entity.getInvestmentRound().isFinalMode(), "title", "entrepreneur.activity.form.error.finalMode");
+		if (entity.getInvestmentRound().isFinalMode()) {
 
-		if (!errors.hasErrors("title")) {
-			Parameter p = this.repository.findParameters();
-			String spamWords = p.getSpamwords();
-			Double spamThreshold = p.getSpamthreshold();
-			String title = entity.getTitle();
-			errors.state(request, !parameterMethods.isSpam(title, spamWords, spamThreshold), "title", "entrepreneur.activity.form.error.spamTitle");
-		}
+			errors.state(request, !entity.getInvestmentRound().isFinalMode(), "budget", "entrepreneur.activity.form.error.finalMode");
 
-		if (!errors.hasErrors("budget")) {
-			Money budget = entity.getBudget();
-			Double sum = this.repository.sumBudgetsByInvestmentRoundId(request.getModel().getInteger("investmentRoundId"));
-			invstRound = this.repository.findOneInvestmentRoundById(request.getModel().getInteger("investmentRoundId"));
+		} else {
 
-			if (sum == null) {
-				sum = 0.;
+			if (!errors.hasErrors("title")) {
+				Parameter p = this.repository.findParameters();
+				String spamWords = p.getSpamwords();
+				Double spamThreshold = p.getSpamthreshold();
+				String title = entity.getTitle();
+				errors.state(request, !parameterMethods.isSpam(title, spamWords, spamThreshold), "title", "entrepreneur.activity.form.error.spamTitle");
 			}
-			errors.state(request, sum + budget.getAmount() <= invstRound.getAmount().getAmount(), "budget", "entrepreneur.activity.budget.biggerThanAmount.error");
-			errors.state(request, budget.getCurrency().contentEquals("EUR") || budget.getCurrency().contentEquals("€"), "budget", "entrepreneur.activity.budget.currency.error");
-		}
 
-		if (!errors.hasErrors("start")) {
-			calendar = new GregorianCalendar();
-			fecha = calendar.getTime();
-			errors.state(request, entity.getStart().after(fecha), "start", "entrepreneur.activity.start.error.dateInPast");
-		}
+			if (!errors.hasErrors("budget")) {
+				Money budget = entity.getBudget();
+				Double sum = this.repository.sumBudgetsByInvestmentRoundId(entity.getInvestmentRound().getId());
+				invstRound = this.repository.findOneInvestmentRoundById(entity.getInvestmentRound().getId());
 
-		if (!errors.hasErrors("end")) {
-			calendar = new GregorianCalendar();
-			fecha = calendar.getTime();
-			errors.state(request, entity.getEnd().after(fecha), "end", "entrepreneur.activity.start.error.dateInPast");
-			errors.state(request, entity.getEnd().after(entity.getStart()), "end", "entrepreneur.activity.start.error.incorrectEnd");
-		}
+				if (sum == null) {
+					sum = 0.;
+				}
+				errors.state(request, sum + budget.getAmount() <= invstRound.getAmount().getAmount(), "budget", "entrepreneur.activity.budget.biggerThanAmount.error");
+				errors.state(request, budget.getCurrency().contentEquals("EUR") || budget.getCurrency().contentEquals("€"), "budget", "entrepreneur.activity.budget.currency.error");
+			}
 
+			if (!errors.hasErrors("start")) {
+				calendar = new GregorianCalendar();
+				fecha = calendar.getTime();
+				errors.state(request, entity.getStart().after(fecha), "start", "entrepreneur.activity.start.error.dateInPast");
+			}
+
+			if (!errors.hasErrors("end")) {
+				calendar = new GregorianCalendar();
+				fecha = calendar.getTime();
+				errors.state(request, entity.getEnd().after(fecha), "end", "entrepreneur.activity.start.error.dateInPast");
+				errors.state(request, entity.getEnd().after(entity.getStart()), "end", "entrepreneur.activity.start.error.incorrectEnd");
+			}
+		}
 	}
 
 	@Override

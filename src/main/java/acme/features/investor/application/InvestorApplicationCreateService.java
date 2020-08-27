@@ -3,6 +3,7 @@ package acme.features.investor.application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -112,6 +113,11 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 
 		//Check ticker
 		if (!errors.hasErrors("ticker")) {
+
+			Collection<Application> aplications = this.repository.findAllApplications();
+			String reference = entity.getTicker();
+			boolean aux = aplications.stream().map(x -> x.getTicker()).anyMatch(x -> x.equals(reference));
+			errors.state(request, !aux, "ticker", "investor.application.ticker.error.tickerInUse");
 
 			boolean isFirstOk, isSecondOk;
 			List<String> tickerParts = new ArrayList<>();

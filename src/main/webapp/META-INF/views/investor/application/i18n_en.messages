@@ -15,6 +15,7 @@ investor.application.form.error.spamStatement = The statement can't contain spam
 investor.application.moneyOffer.error.maxSurpassed = Can't invest more than the max investment amount
 investor.application.moneyOffer.error.currency = Can't use a currency that isn't euros
 investor.application.moneyOffer.error.negativeMoney = Can't use negative amounts
+investor.application.ticker.error.tickerInUse = The ticker is already in use
 
 investor.application.form.button.create = Create
 investor.application.form.button.return = Return

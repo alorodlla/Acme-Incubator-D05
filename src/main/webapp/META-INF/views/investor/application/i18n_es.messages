@@ -15,6 +15,7 @@ investor.application.form.error.spamStatement = La declaración no puede contene
 investor.application.moneyOffer.error.maxSurpassed = No se puede invertir más de la cantidad máxima de la ronda de inversión
 investor.application.moneyOffer.error.currency = No se puede usar una moneda que no sea el euro
 investor.application.moneyOffer.error.negativeMoney = No se pueden usar cantidades negativas
+investor.application.ticker.error.tickerInUse = Este ticker ya esta en uso
 
 investor.application.form.button.create = Crear
 investor.application.form.button.return = Volver

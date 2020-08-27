@@ -16,6 +16,7 @@ entrepreneur.investmentRound.ticker.year.error = Second part denotes the last tw
 entrepreneur.investmentRound.form.error.budgetsNotSumAmount = Activity budgets sum is not equal to the amount in the investment
 entrepreneur.investmentRound.form.error.budgetsIsNull = There are not activities associated to the investment
 entrepreneur.investmentRound.amount.currency.error = Money currency is euros
+entrepreneur.investmentRound.ticker.tickerInUse = The ticker is already in use
 
 entrepreneur.investmentRound.form.label.activities = Work Programme
 entrepreneur.investmentRound.form.label.createActivities = Create Activity
