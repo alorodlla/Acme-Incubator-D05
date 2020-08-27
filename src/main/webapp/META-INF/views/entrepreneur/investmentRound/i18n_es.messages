@@ -16,6 +16,7 @@ entrepreneur.investmentRound.ticker.year.error = La segunda parte del ticker cor
 entrepreneur.investmentRound.form.error.budgetsNotSumAmount = La suma de los presupuestos de las actividades no es igual al necesitado por la inversion 
 entrepreneur.investmentRound.form.error.budgetsIsNull = No hay actividades asociadas a la inversion	
 entrepreneur.investmentRound.amount.currency.error = La moneda debe estar expresada en euros 
+entrepreneur.investmentRound.ticker.tickerInUse = Este ticker ya esta en uso
 	
 entrepreneur.investmentRound.form.label.activities = Programa del trabajo
 entrepreneur.investmentRound.form.label.createActivities = Crear Actividad

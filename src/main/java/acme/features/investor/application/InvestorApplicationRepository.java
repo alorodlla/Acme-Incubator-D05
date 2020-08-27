@@ -30,4 +30,6 @@ public interface InvestorApplicationRepository extends AbstractRepository {
 	@Query("select p from Parameter p")
 	Parameter findParameters();
 
+	@Query("select a from Application a")
+	Collection<Application> findAllApplications();
 }

@@ -87,7 +87,7 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 		Collection<Application> applications = this.repository.applicationsByInvestmentRoundId(investmentRoundId);
 		boolean aux = applications.isEmpty();
 
-		errors.state(request, aux, "finalMode", "entrepreneur.investmentRound.form.delete.error");
+		errors.state(request, aux, "optionalLink", "entrepreneur.investmentRound.form.delete.message");
 
 	}
 

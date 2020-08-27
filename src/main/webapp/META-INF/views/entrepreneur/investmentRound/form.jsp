@@ -4,14 +4,73 @@
 
 <acme:form>
 	<acme:form-textbox code="entrepreneur.investmentRound.list.label.title" path="title"/>
+	
+	<jstl:if test="${round == 'SEED'}">
 	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
-		<acme:form-option code="SEED" value="SEED" selected="true"/>
+		<acme:form-option code="SEED" value="SEED"/>
 		<acme:form-option code="ANGEL" value="ANGEL"/>
-		<acme:form-option code="SERIES_A" value="SERIES A"/>
-		<acme:form-option code="SERIES_B" value="SERIES B"/>
-		<acme:form-option code="SERIES_C" value="SERIES C"/>
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
 		<acme:form-option code="BRIDGE" value="BRIDGE"/>
 	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${round == 'ANGEL'}">
+	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
+		<acme:form-option code="ANGEL" value="ANGEL"/>
+		<acme:form-option code="SEED" value="SEED"/>
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
+		<acme:form-option code="BRIDGE" value="BRIDGE"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${round == 'SERIES_A'}">
+	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SEED" value="SEED"/>
+		<acme:form-option code="ANGEL" value="ANGEL"/>
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
+		<acme:form-option code="BRIDGE" value="BRIDGE"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${round == 'SERIES_B'}">
+	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="SEED" value="SEED"/>
+		<acme:form-option code="ANGEL" value="ANGEL"/>
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
+		<acme:form-option code="BRIDGE" value="BRIDGE"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${round == 'SERIES_C'}">
+	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
+		<acme:form-option code="SEED" value="SEED"/>
+		<acme:form-option code="ANGEL" value="ANGEL"/>
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="BRIDGE" value="BRIDGE"/>
+	</acme:form-select>
+	</jstl:if>
+	
+	<jstl:if test="${round == 'BRIDGE'}">
+	<acme:form-select code="entrepreneur.investmentRound.list.label.round" path="round">
+		<acme:form-option code="BRIDGE" value="BRIDGE"/>
+		<acme:form-option code="SEED" value="SEED"/>
+		<acme:form-option code="ANGEL" value="ANGEL"/>
+		<acme:form-option code="SERIES A" value="SERIES_A"/>
+		<acme:form-option code="SERIES B" value="SERIES_B"/>
+		<acme:form-option code="SERIES C" value="SERIES_C"/>
+	</acme:form-select>
+	</jstl:if>
+	
 	<acme:form-textarea code="entrepreneur.investmentRound.list.label.description" path="description"/>
 	<jstl:if test="${command != 'create'}">
 		<acme:form-moment code="entrepreneur.investmentRound.list.label.creation" path="creation" readonly="true"/>
@@ -29,12 +88,6 @@
     	<acme:form-option code="entrepreneur.investmentRound.form.label.false" value="false"/>
     	<acme:form-option code="entrepreneur.investmentRound.form.label.true" value="true"/>
     </acme:form-select>
-    
-    <jstl:if test="${command != 'create'}">
-    <acme:message code="entrepreneur.investmentRound.form.delete.message"/>	
-    </jstl:if>
-    <br>
-    
     
 	</jstl:if>    
     <acme:form-submit test="${command == 'show'  && finalMode == 'false'}"
@@ -54,10 +107,10 @@
   		action="/entrepreneur/investment-round/update"/>
   		
   	<acme:form-submit test="${command == 'delete'}"
-  		code="entrepreneur.investmenRound.form.button.delete"
+  		code="entrepreneur.investmentRound.form.button.delete"
   		action="/entrepreneur/investment-round/delete"/>
   		
-  	<jstl:if test="${command != 'create'}">
+  	<jstl:if test="${command != 'create' && finalMode == 'false'}">
 	<acme:form-submit method="get" code="entrepreneur.investmentRound.form.label.createActivities" action="/entrepreneur/activity/create?investmentRoundId=${id}"/>
 	</jstl:if>
   		

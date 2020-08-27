@@ -93,6 +93,14 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		investmentRound = this.repository.findOneById(investmentRoundId);
 		entrepreneur = investmentRound.getEntrepreneur();
 
+		if (!errors.hasErrors("title")) {
+			Parameter p = this.repository.findParameters();
+			String spamWords = p.getSpamwords();
+			Double spamThreshold = p.getSpamthreshold();
+			String description = entity.getTitle();
+			errors.state(request, !parameterMethods.isSpam(description, spamWords, spamThreshold), "title", "entrepreneur.investmentRound.form.error.spamDescription");
+		}
+
 		if (entity.isFinalMode()) {
 			Collection<Activity> activities = this.repository.findManyActivitiesByInvestmentRoundId(investmentRoundId);
 
@@ -120,6 +128,11 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		}
 
 		if (!errors.hasErrors("ticker")) {
+
+			Collection<InvestmentRound> investmentRounds = this.repository.findAllInvestmentRounds();
+			String ticker = entity.getTicker();
+			boolean aux = investmentRounds.stream().map(x -> x.getTicker()).anyMatch(x -> x.equals(ticker));
+			errors.state(request, !aux || ticker.equals(request.getModel().getString("ticker")), "ticker", "entrepreneur.investmentRound.ticker.tickerInUse");
 
 			boolean isFirstOk, isSecondOk;
 			List<String> tickerParts = new ArrayList<>();

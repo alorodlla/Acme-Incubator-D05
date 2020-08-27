@@ -3,6 +3,7 @@ package acme.features.entrepreneur.investmentRounds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -93,6 +94,14 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 		int UserAccountId = principal.getAccountId();
 		Entrepreneur entrepreneur = this.repository.findEntrepreneurByUserAccountId(UserAccountId);
 
+		if (!errors.hasErrors("title")) {
+			Parameter p = this.repository.findParameters();
+			String spamWords = p.getSpamwords();
+			Double spamThreshold = p.getSpamthreshold();
+			String description = entity.getTitle();
+			errors.state(request, !parameterMethods.isSpam(description, spamWords, spamThreshold), "title", "entrepreneur.investmentRound.form.error.spamDescription");
+		}
+
 		if (!errors.hasErrors("description")) {
 			Parameter p = this.repository.findParameters();
 			String spamWords = p.getSpamwords();
@@ -107,6 +116,11 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 		}
 
 		if (!errors.hasErrors("ticker")) {
+
+			Collection<InvestmentRound> investmentRounds = this.repository.findAllInvestmentRounds();
+			String reference = entity.getTicker();
+			boolean aux = investmentRounds.stream().map(x -> x.getTicker()).anyMatch(x -> x.equals(reference));
+			errors.state(request, !aux, "ticker", "entrepreneur.investmentRound.ticker.tickerInUse");
 
 			boolean isFirstOk, isSecondOk;
 			List<String> tickerParts = new ArrayList<>();
