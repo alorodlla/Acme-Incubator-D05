@@ -63,6 +63,7 @@ master.menu.administrator.toolRecord.create = Nuevo Registro de Herramienta
 master.menu.administrator.overture.create = Nueva Propuesta
 master.menu.administrator = Administrador
 master.menu.administrator.user-accounts = Cuentas de usuario
+master.menu.administrator.showRequest = Parametros
 master.menu.administrator.shutdown = Parar el sistema
 
 # master.menu.provider ########################################################
