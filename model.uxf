@@ -546,10 +546,12 @@ m2=1
 --
 + ticker: String {NotBlank, Column(unique = true)}
 + creationMoment: Date {NotNull, Temporal(TIMESTAMP), PastOrPresent}
++ status: String {NotNull}
 + statement: String {NotBlank}
-+ moneyOffer: Money {Valid, NotNull}
 + justification: String
-+ moneyOffer: Money {Valid, NotNull}</panel_attributes>
++ moneyOffer: Money {Valid, NotNull}
+
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
