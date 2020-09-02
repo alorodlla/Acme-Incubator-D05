@@ -3,6 +3,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
+	<acme:form-hidden path="finalMode"/>
 	<acme:form-textbox code="investor.investmentRound.list.label.title" path="title" readonly="true"/>
 	<jstl:if test="${command != 'show'}">
 	<acme:form-select code="investor.investmentRound.list.label.round" path="round" readonly="true">
@@ -21,15 +22,11 @@
 	<acme:form-moment code="investor.investmentRound.list.label.creation" path="creation" readonly="true"/>
 	<acme:form-money code="investor.investmentRound.list.label.amount" path="amount" readonly="true"/>
 	<acme:form-textbox code="investor.investmentRound.list.label.ticker" path="ticker" readonly="true"/>
-	<jstl:if test="${command != 'show'}">
 	<acme:form-url code="investor.investmentRound.list.label.optionalLink" path="optionalLink" readonly="true"/>
-	</jstl:if>
-	<jstl:if test="${command == 'show'}">
-	<acme:form-textbox code="investor.investmentRound.list.label.optionalLink" path="optionalLink" readonly="true"/>
-	</jstl:if>
 	
 	<acme:form-submit method="get" code="investor.investmentRound.form.label.activities" action="/investor/activity/list-from-investment?investmentRoundId=${id}"/>
-	
+	<jstl:if test="${finalMode == true}">
 	<acme:form-submit method="get" code="investor.investmentRoundApp.form.button.create" action="/investor/application/create?iRoundId=${id}"/>
+	</jstl:if>
 	<acme:form-return code="investor.investmentRound.button.return"/>
 </acme:form>
